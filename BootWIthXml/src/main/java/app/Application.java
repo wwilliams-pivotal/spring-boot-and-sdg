@@ -16,13 +16,11 @@ import org.apache.geode.cache.query.SelectResults;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 import io.pivotal.domain.Department;
 import io.pivotal.domain.Employee;
 
-@Configuration
 @ImportResource({ "classpath:config/application-context.xml" })
 @SpringBootApplication
 public class Application implements CommandLineRunner {
