@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:gfe-data="http://www.springframework.org/schema/data/gemfire"
+	xmlns:gfe="http://www.springframework.org/schema/geode"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/geode http://www.springframework.org/schema/geode/spring-geode.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/data/gemfire http://www.springframework.org/schema/data/gemfire/spring-data-gemfire.xsd">
+
+	<gfe:client-cache 
+	    id="client-cache" 
+	    pool-name="gfPool"
+	    properties-ref="props" />
+	
+	<gfe:pool id="gfPool" max-connections="10">
+		<gfe:locator host="localhost" port="10334"/>
+	</gfe:pool>
+	
+	<gfe:client-region id="departments" name="departments" shortcut="PROXY" cache-ref="client-cache"/>
+   	<gfe:client-region id="employees" name="employees" shortcut="PROXY" cache-ref="client-cache"/>
+   		
+   	<gfe-data:repositories base-package="io.pivotal.app.repos"  />
+   	
+   	<util:properties id="props" location="classpath:config/gemfire.properties"/>
+   	
+</beans>
