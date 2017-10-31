@@ -3,46 +3,31 @@ package io.pivotal.domain;
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.gemfire.mapping.annotation.Region;
 
-@SuppressWarnings("serial")
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NonNull;
+
+@Data
 @Region("departments")
-public class Department implements Serializable
-{	
+@SuppressWarnings("serial")
+@AllArgsConstructor(staticName = "newDepartment")
+public class Department implements Serializable {
+
 	@Id
 	private int deptno;
+
+	@NonNull
 	private String name;
-	
-	public Department() 
-	{
-	}
 
-	public Department(int deptno, String name) {
-		super();
-		this.deptno = deptno;
-		this.name = name;
-	}
-
-	public int getDeptno() {
-		return deptno;
-	}
-
-	public void setDeptno(int deptno) {
-		this.deptno = deptno;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	@PersistenceConstructor
+	public Department() {
 	}
 
 	@Override
 	public String toString() {
-		return "Department [deptno=" + deptno + ", name=" + name + "]";
+		return "Department [deptno=" + getDeptno() + ", name=" + getName() + "]";
 	}
-
-	
 }

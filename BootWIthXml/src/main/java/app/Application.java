@@ -2,70 +2,58 @@ package app;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.Resource;
-
-import org.apache.geode.cache.Region;
-import org.apache.geode.cache.client.ClientCache;
-import org.apache.geode.cache.query.Query;
-import org.apache.geode.cache.query.QueryService;
-import org.apache.geode.cache.query.SelectResults;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
+import io.pivotal.app.repos.DepartmentRepository;
+import io.pivotal.app.repos.EmployeeRepository;
 import io.pivotal.domain.Department;
 import io.pivotal.domain.Employee;
 
-@ImportResource({ "classpath:config/application-context.xml" })
-@SpringBootApplication
-public class Application implements CommandLineRunner {
+@Configuration
+@ImportResource("classpath:config/application-context.xml")
+public class Application {
 
-	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
+	private final Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 
 	public static void main(String[] args) throws IOException {
 		new SpringApplication(Application.class).run(args);
 	}
 
-	@Resource(name = "departmentRegion")
-	Region<String, Department> departmentRegion;
+	@Bean
+	ApplicationRunner runner(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
 
-	@Resource(name = "clientCache")
-	ClientCache clientCache;
+		return args -> {
 
-	@Override
-	public void run(String... strings) throws Exception {
+			Department department = Department.newDepartment(30, "Marketing");
 
-		Department d = new Department(10, "Human Resources");
-		departmentRegion.put("10", d);
-		d = departmentRegion.get("10");
-		System.out.println((d == null) ? "null" : d);
+			department = departmentRepository.save(department);
+			department = departmentRepository.findById(department.getDeptno()).orElse(null);
 
-		queryAllEmployees();
+			System.out.printf("Department is [%s]%n", department);
+
+			queryAllEmployeesByDepartment(employeeRepository, department.getDeptno());
+
+		};
 	}
 
-	public void queryAllEmployees() throws Exception {
-		QueryService queryService = clientCache.getQueryService();
+	private void queryAllEmployeesByDepartment(EmployeeRepository employeeRepository, int departmentNumber)
+			throws Exception {
 
-		Query query = queryService.newQuery("SELECT * FROM /employees where deptno = 10");
-		logger.log(Level.INFO, "\nExecuting query:\n\t" + query.getQueryString());
+		Collection<Employee> employeesInDepartment = employeeRepository.findByDeptno(departmentNumber);
 
-		Object result = query.execute();
+		this.logger.info(() -> String.format("There are %d Employees in Department %d",
+			employeesInDepartment.size(), departmentNumber));
 
-		Collection<?> collection = ((SelectResults<?>) result).asList();
-		logger.log(Level.INFO, String.format("%s Employees in department 10", collection.size()));
+		this.logger.info("*************************************************************");
 
-		Iterator<?> iter = collection.iterator();
+		employeesInDepartment.forEach(System.out::println);
 
-		System.out.println("*************************************************************");
-		while (iter.hasNext()) {
-			Employee emp = (Employee) iter.next();
-			System.out.println(emp.toString());
-		}
-		System.out.println("*************************************************************");
+		this.logger.info("*************************************************************");
 	}
 }

@@ -3,74 +3,45 @@ package io.pivotal.domain;
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.gemfire.mapping.annotation.Region;
 
-@SuppressWarnings("serial")
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NonNull;
+
+@Data
 @Region("employees")
-public class Employee implements Serializable
-{	
-	@Id
-	private int empno;
-	private String name;
-	private String job;
-	private int deptno;
-	
-	public Employee() 
-	{
-	}
+@SuppressWarnings("serial")
+@AllArgsConstructor(staticName = "newEmployee")
+public class Employee implements Serializable {
 
-	public Employee(int empno, String name, String job, int deptno) {
-		super();
-		this.empno = empno;
-		this.name = name;
-		this.job = job;
-		this.deptno = deptno;
-	}
+  @Id
+  private int empno;
 
-	public int getEmpno() {
-		return empno;
-	}
+  private int deptno;
 
-	public void setEmpno(int empno) {
-		this.empno = empno;
-	}
+  @NonNull
+  private String name;
 
-	public String getName() {
-		return name;
-	}
+  private String job;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  @PersistenceConstructor
+  public Employee() {
+  }
 
-	public String getJob() {
-		return job;
-	}
+  public void replaceLastName(String lastName) {
+    String name = getName();
+    setName(name.substring(0, name.indexOf(" ")) + " " + lastName);
+  }
 
-	public void setJob(String job) {
-		this.job = job;
-	}
+  @Override
+  public String toString() {
+    return "Employee [empno=" + getEmpno() + ", name=" + getName() + ", job=" + getJob()
+      + ", deptno=" + getDeptno() + "]";
+  }
 
-	public int getDeptno() {
-		return deptno;
-	}
-
-	public void setDeptno(int deptno) {
-		this.deptno = deptno;
-	}
-
-	   
-    public void replaceLastName(String lastName) {
-    	name = name.substring(0, name.indexOf(" ")) + lastName;
-    }
-
-	@Override
-	public String toString() {
-		return "Employee [empno=" + empno + ", name=" + name + ", job=" + job
-				+ ", deptno=" + deptno + "]";
-	}
-
-	public String toCSVFormat() {
-		return empno + "," + name + "," + job + "," + deptno;
-	}
+  public String toCSVFormat() {
+    return getEmpno() + "," + getName() + "," + getJob() + "," + getDeptno();
+  }
 }
