@@ -22,8 +22,8 @@
 		<module>DomainService</module>
 		<module>BootGemFireServer</module>
 		<module>BootWithAnnotations</module>
-		<module>BootWithXml</module>
 		<module>BootWithJavaConfig</module>
+		<module>BootWithXml</module>
 	</modules>
 
 	<properties>
