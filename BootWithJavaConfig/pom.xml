@@ -20,6 +20,16 @@
     <dependency>
       <groupId>io.pivotal.spring-boot-and-sdg</groupId>
       <artifactId>DomainService</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-gemfire</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-geode</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 
