@@ -7,14 +7,13 @@
   <parent>
     <groupId>io.pivotal.spring-boot-and-sdg</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.0.0.SNAPSHOT</version>
+    <version>1.0.0.BUILD-SNAPSHOT</version>
   </parent>
 
   <artifactId>BootWithAnnotations</artifactId>
   <packaging>jar</packaging>
 
   <name>BootWithAnnotations</name>
-  <url>http://maven.apache.org</url>
 
   <dependencies>
     <dependency>
@@ -22,5 +21,14 @@
       <artifactId>DomainService</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
