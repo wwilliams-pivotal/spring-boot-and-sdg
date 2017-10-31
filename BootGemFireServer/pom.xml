@@ -8,14 +8,17 @@
   <parent>
     <groupId>io.pivotal.spring-boot-and-sdg</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.0.0.SNAPSHOT</version>
+    <version>1.0.0.BUILD-SNAPSHOT</version>
   </parent>
 
   <artifactId>BootGemFireServer</artifactId>
   <packaging>jar</packaging>
 
   <name>BootGemFireServer</name>
-  <url>http://maven.apache.org</url>
+
+  <properties>
+    <application-class>io.pivotal.app.Application</application-class>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -23,5 +26,17 @@
       <artifactId>DomainService</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>${application-class}</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
