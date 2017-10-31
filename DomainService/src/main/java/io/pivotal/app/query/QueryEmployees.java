@@ -11,7 +11,7 @@ import org.apache.geode.cache.query.Query;
 import org.apache.geode.cache.query.QueryService;
 import org.apache.geode.cache.query.SelectResults;
 
-import io.pivotal.domain.Employee;
+import io.pivotal.app.domain.Employee;
 
 public class QueryEmployees
 {

@@ -1,4 +1,4 @@
-package app;
+package io.pivotal.app;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
+import io.pivotal.app.domain.Department;
+import io.pivotal.app.domain.Employee;
 import io.pivotal.app.repos.DepartmentRepository;
 import io.pivotal.app.repos.EmployeeRepository;
-import io.pivotal.domain.Department;
-import io.pivotal.domain.Employee;
 
 @Configuration
 @ImportResource("classpath:config/application-context.xml")

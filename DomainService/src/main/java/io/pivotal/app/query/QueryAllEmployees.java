@@ -9,7 +9,7 @@ import org.apache.geode.cache.Region;
 import org.apache.geode.cache.client.ClientCache;
 import org.apache.geode.cache.client.ClientCacheFactory;
 
-import io.pivotal.domain.Employee;
+import io.pivotal.app.domain.Employee;
 
 public class QueryAllEmployees
 {

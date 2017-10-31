@@ -1,4 +1,4 @@
-package app;
+package io.pivotal.app;
 
 import static org.springframework.data.gemfire.util.ArrayUtils.asArray;
 
@@ -18,10 +18,10 @@ import org.springframework.data.gemfire.config.annotation.EnablePdx;
 import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
 import org.springframework.data.gemfire.support.ConnectionEndpoint;
 
+import io.pivotal.app.domain.Department;
+import io.pivotal.app.domain.Employee;
 import io.pivotal.app.repos.DepartmentRepository;
 import io.pivotal.app.repos.EmployeeRepository;
-import io.pivotal.domain.Department;
-import io.pivotal.domain.Employee;
 
 @ClientCacheApplication(name = "BootWithAnnotations", pingInterval = 5000, readTimeout = 20000, retryAttempts = 1)
 @EnableEntityDefinedRegions(basePackageClasses = Employee.class)
@@ -37,7 +37,7 @@ public class Application {
 
   @Bean
   ReflectionBasedAutoSerializer autoSerializer() {
-    return new ReflectionBasedAutoSerializer("io.pivotal.domain.*");
+    return new ReflectionBasedAutoSerializer("io.pivotal.app.domain.*");
   }
 
   @Bean

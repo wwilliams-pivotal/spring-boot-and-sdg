@@ -1,4 +1,4 @@
-package app;
+package io.pivotal.app;
 
 import static org.springframework.data.gemfire.util.ArrayUtils.asArray;
 
@@ -21,10 +21,10 @@ import org.springframework.data.gemfire.client.ClientRegionFactoryBean;
 import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
 import org.springframework.data.gemfire.support.ConnectionEndpoint;
 
+import io.pivotal.app.domain.Department;
+import io.pivotal.app.domain.Employee;
 import io.pivotal.app.repos.DepartmentRepository;
 import io.pivotal.app.repos.EmployeeRepository;
-import io.pivotal.domain.Department;
-import io.pivotal.domain.Employee;
 
 @Configuration
 @EnableGemfireRepositories(basePackageClasses = EmployeeRepository.class)
@@ -53,7 +53,7 @@ public class Application {
 
     ClientCacheFactoryBean clientCache = new ClientCacheFactoryBean();
 
-    clientCache.setPdxSerializer(new ReflectionBasedAutoSerializer("io.pivotal.domain.*"));
+    clientCache.setPdxSerializer(new ReflectionBasedAutoSerializer("io.pivotal.app.domain.*"));
     clientCache.setPdxReadSerialized(false);
     clientCache.setProperties(gemfireProperties());
 

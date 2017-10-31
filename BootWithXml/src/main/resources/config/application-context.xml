@@ -20,7 +20,7 @@
   <bean id="autoSerializer" class="org.apache.geode.pdx.ReflectionBasedAutoSerializer">
     <constructor-arg index="0">
       <list>
-        <value>io.pivotal.domain.*</value>
+        <value>io.pivotal.app.domain.*</value>
       </list>
     </constructor-arg>
   </bean>

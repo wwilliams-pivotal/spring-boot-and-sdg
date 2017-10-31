@@ -1,4 +1,4 @@
-package io.pivotal.domain;
+package io.pivotal.app.domain;
 
 import java.io.Serializable;
 

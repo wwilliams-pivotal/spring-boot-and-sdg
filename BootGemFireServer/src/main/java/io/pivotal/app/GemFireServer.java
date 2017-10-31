@@ -1,4 +1,4 @@
-package app;
+package io.pivotal.app;
 
 import org.apache.geode.pdx.ReflectionBasedAutoSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,10 +13,10 @@ import org.springframework.data.gemfire.config.annotation.EnableManager;
 import org.springframework.data.gemfire.config.annotation.EnablePdx;
 import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
 
+import io.pivotal.app.domain.Department;
+import io.pivotal.app.domain.Employee;
 import io.pivotal.app.repos.DepartmentRepository;
 import io.pivotal.app.repos.EmployeeRepository;
-import io.pivotal.domain.Department;
-import io.pivotal.domain.Employee;
 
 @CacheServerApplication(name = "SpringBootGemFireCacheServer")
 @EnableEntityDefinedRegions(basePackageClasses = Employee.class)
@@ -32,7 +32,7 @@ public class GemFireServer {
 
   @Bean
   ReflectionBasedAutoSerializer autoSerializer() {
-    return new ReflectionBasedAutoSerializer("io.pivotal.domain.*");
+    return new ReflectionBasedAutoSerializer("io.pivotal.app.domain.*");
   }
 
   @Bean
