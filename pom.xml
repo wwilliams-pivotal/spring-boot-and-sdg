@@ -17,6 +17,35 @@
 
 	<name>parent-pom</name>
 	<description>Demo project for Spring Boot and Spring Data GemFire</description>
+	<url>https://github.com/wwilliams-pivotal/spring-boot-and-sdg</url>
+
+	<organization>
+		<name>Pivotal Software, Inc.</name>
+		<url>http://www.pivotal.io</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>wwilliams-pivotal</id>
+			<name>Wes Williams</name>
+			<email>wwilliams at pivotal dot io</email>
+			<organization>Pivotal Software, Inc.</organization>
+			<organizationUrl>http://www.pivotal.io</organizationUrl>
+			<roles>
+				<role>Pivotal Architect</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>jblum</id>
+			<name>John Blum</name>
+			<email>jblum at pivotal dot io</email>
+			<organization>Pivotal Software, Inc.</organization>
+			<organizationUrl>http://www.spring.io</organizationUrl>
+			<roles>
+				<role>Spring Data Team</role>
+			</roles>
+		</developer>
+	</developers>
 
 	<modules>
 		<module>DomainService</module>
@@ -70,10 +99,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-gemfire</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.shell</groupId>
 			<artifactId>spring-shell</artifactId>
 			<scope>runtime</scope>
@@ -92,5 +117,32 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>gemfire</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.data</groupId>
+					<artifactId>spring-data-gemfire</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>geode</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.data</groupId>
+					<artifactId>spring-data-geode</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 
 </project>
