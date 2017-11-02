@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:gfe="http://www.springframework.org/schema/gemfire"
+       xmlns:gfe-data="http://www.springframework.org/schema/data/gemfire"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/gemfire http://www.springframework.org/schema/gemfire/spring-gemfire.xsd
+       http://www.springframework.org/schema/data/gemfire http://www.springframework.org/schema/data/gemfire/spring-data-gemfire.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+">
+
+  <util:properties id="gemfireProperties" location="classpath:config/gemfire.properties"/>
+
+  <gfe:client-cache cache-xml-location="classpath:config/client.xml" pool-name="gemfirePool" properties-ref="gemfireProperties"/>
+
+  <gfe:pool max-connections="10">
+    <gfe:locator host="localhost" port="10334"/>
+  </gfe:pool>
+
+  <gfe:lookup-region id="departments"/>
+  <gfe:lookup-region id="employees"/>
+
+  <gfe-data:repositories base-package="io.pivotal.app.repos"/>
+
+</beans>

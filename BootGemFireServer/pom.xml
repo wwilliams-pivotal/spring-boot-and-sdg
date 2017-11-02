@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
@@ -10,10 +11,14 @@
     <version>1.0.0.BUILD-SNAPSHOT</version>
   </parent>
 
-  <artifactId>BootWithAnnotations</artifactId>
+  <artifactId>BootGemFireServer</artifactId>
   <packaging>jar</packaging>
 
-  <name>BootWithAnnotations</name>
+  <name>BootGemFireServer</name>
+
+  <properties>
+    <application-class>io.pivotal.app.GemFireServer</application-class>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -37,6 +42,17 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>${application-class}</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${exec-maven-plugin.version}</version>
+        <configuration>
+          <mainClass>${application-class}</mainClass>
+        </configuration>
       </plugin>
     </plugins>
   </build>

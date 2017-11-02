@@ -10,10 +10,10 @@
     <version>1.0.0.BUILD-SNAPSHOT</version>
   </parent>
 
-  <artifactId>BootWithAnnotations</artifactId>
+  <artifactId>BootWithXml</artifactId>
   <packaging>jar</packaging>
 
-  <name>BootWithAnnotations</name>
+  <name>BootWithXml</name>
 
   <dependencies>
     <dependency>

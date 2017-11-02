@@ -1,7 +1,5 @@
 package io.pivotal.app.query;
 
-import io.pivotal.domain.Employee;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -12,6 +10,8 @@ import org.apache.geode.cache.client.ClientCacheFactory;
 import org.apache.geode.cache.query.Query;
 import org.apache.geode.cache.query.QueryService;
 import org.apache.geode.cache.query.SelectResults;
+
+import io.pivotal.app.domain.Employee;
 
 public class QueryEmployees
 {

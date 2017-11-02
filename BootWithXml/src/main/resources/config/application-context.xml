@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:gfe="http://www.springframework.org/schema/gemfire"
+       xmlns:gfe-data="http://www.springframework.org/schema/data/gemfire"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/gemfire http://www.springframework.org/schema/gemfire/spring-gemfire.xsd
+        http://www.springframework.org/schema/data/gemfire http://www.springframework.org/schema/data/gemfire/spring-data-gemfire.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+">
+
+  <context:property-placeholder/>
+
+  <util:properties id="gemfireProperties" location="classpath:config/gemfire.properties"/>
+
+  <bean id="autoSerializer" class="org.apache.geode.pdx.ReflectionBasedAutoSerializer">
+    <constructor-arg index="0">
+      <list>
+        <value>io.pivotal.app.domain.*</value>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <gfe:client-cache properties-ref="gemfireProperties" pdx-serializer-ref="autoSerializer"/>
+
+  <gfe:pool id="gemfirePool" max-connections="10">
+    <gfe:locator host="${gemfire.locator.host:localhost}" port="${gemfire.locator.port:10334}"/>
+  </gfe:pool>
+
+  <gfe:client-region id="departments" shortcut="PROXY"/>
+  <gfe:client-region id="employees" shortcut="PROXY"/>
+
+  <gfe-data:repositories base-package="io.pivotal.app.repos"/>
+
+</beans>
