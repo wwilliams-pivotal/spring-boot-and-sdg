@@ -30,7 +30,7 @@ public class Application {
 
 		return args -> {
 
-			Department department = Department.newDepartment(30, "Marketing");
+			Department department = new Department("30", "Marketing");
 
 			department = departmentRepository.save(department);
 			department = departmentRepository.findById(department.getDeptno()).orElse(null);
@@ -42,7 +42,7 @@ public class Application {
 		};
 	}
 
-	private void queryAllEmployeesByDepartment(EmployeeRepository employeeRepository, int departmentNumber)
+	private void queryAllEmployeesByDepartment(EmployeeRepository employeeRepository, String departmentNumber)
 			throws Exception {
 
 		Collection<Employee> employeesInDepartment = employeeRepository.findByDeptno(departmentNumber);

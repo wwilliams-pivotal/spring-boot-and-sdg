@@ -33,7 +33,7 @@ public class GemFireTemplateTest {
   @SuppressWarnings("unchecked")
   private void run() {
 
-    Region<Integer, Employee> employeesRegion = this.applicationContext.getBean("employees", Region.class);
+    Region<String, Employee> employeesRegion = this.applicationContext.getBean("employees", Region.class);
 
     GemfireTemplate employeesTemplate = new GemfireTemplate(employeesRegion);
 

@@ -6,8 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import io.pivotal.app.domain.Employee;
 
-public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
+public interface EmployeeRepository extends CrudRepository<Employee, String> {
 
-	Collection<Employee> findByDeptno(int deptno);
+	Collection<Employee> findByDeptno(String deptno);
 
 }

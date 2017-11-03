@@ -23,7 +23,7 @@ public class QueryEmployeeByKey
 
     public void run() throws Exception
     {
-        Region<Integer,Employee> employees = cache.getRegion("employees");
+        Region<String,Employee> employees = cache.getRegion("employees");
 
         String empKey = "7370";
         Employee emp = employees.get(empKey);

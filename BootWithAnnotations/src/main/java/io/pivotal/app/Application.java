@@ -54,7 +54,7 @@ public class Application {
 
     return args -> {
 
-      Department department = Department.newDepartment(10, "Human Resources");
+      Department department = new Department("10", "Human Resources");
 
       department = departmentRepository.save(department);
       department = departmentRepository.findById(department.getDeptno()).orElse(null);
@@ -66,11 +66,11 @@ public class Application {
     };
   }
 
-  private void queryAllEmployeesByDepartment(EmployeeRepository employeeRepository, int departmentNumber) throws Exception {
+  private void queryAllEmployeesByDepartment(EmployeeRepository employeeRepository, String departmentNumber) throws Exception {
 
     Collection<Employee> employeesInDepartment = employeeRepository.findByDeptno(departmentNumber);
 
-    this.logger.info(() -> String.format("There are %d Employees in Department %d",
+    this.logger.info(() -> String.format("There are %d Employees in Department %s",
       employeesInDepartment.size(), departmentNumber));
 
     this.logger.info("*************************************************************");

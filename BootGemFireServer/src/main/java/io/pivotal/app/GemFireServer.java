@@ -51,26 +51,26 @@ public class GemFireServer {
 
   private void loadDepartmentData(DepartmentRepository departmentRepository) {
 
-    departmentRepository.save(Department.newDepartment(10, "ACCOUNTING"));
-    departmentRepository.save(Department.newDepartment(20, "RESEARCH"));
-    departmentRepository.save(Department.newDepartment(30, "SALES"));
-    departmentRepository.save(Department.newDepartment(40, "OPERATIONS"));
+    departmentRepository.save(new Department("10", "ACCOUNTING"));
+    departmentRepository.save(new Department("20", "RESEARCH"));
+    departmentRepository.save(new Department("30", "SALES"));
+    departmentRepository.save(new Department("40", "OPERATIONS"));
   }
 
   private void loadEmployeeData(EmployeeRepository employeeRepository) {
 
-    employeeRepository.save(Employee.newEmployee(7369, 20, "SMITH", "CLERK"));
-    employeeRepository.save(Employee.newEmployee(7370, 10, "APPLES", "MANAGER"));
-    employeeRepository.save(Employee.newEmployee(7371, 10, "WILLIAMS", "SALESMAN"));
-    employeeRepository.save(Employee.newEmployee(7372, 30, "LUCIA", "PRESIDENT"));
-    employeeRepository.save(Employee.newEmployee(7373, 40, "SIENA", "CLERK"));
-    employeeRepository.save(Employee.newEmployee(7374, 10, "LUCAS", "SALESMAN"));
-    employeeRepository.save(Employee.newEmployee(7375, 30, "ROB", "CLERK"));
-    employeeRepository.save(Employee.newEmployee(7376, 20, "ADRIAN", "CLERK"));
-    employeeRepository.save(Employee.newEmployee(7377, 20, "ADAM", "CLERK"));
-    employeeRepository.save(Employee.newEmployee(7378, 20, "SALLY", "MANAGER"));
-    employeeRepository.save(Employee.newEmployee(7379, 10, "FRANK", "CLERK"));
-    employeeRepository.save(Employee.newEmployee(7380, 40, "BLACK", "CLERK"));
-    employeeRepository.save(Employee.newEmployee(7381, 40, "BROWN", "SALESMAN"));
+    employeeRepository.save(new Employee("7369", "20", "SMITH", "CLERK"));
+    employeeRepository.save(new Employee("7370", "10", "APPLES", "MANAGER"));
+    employeeRepository.save(new Employee("7371", "10", "WILLIAMS", "SALESMAN"));
+    employeeRepository.save(new Employee("7372", "30", "LUCIA", "PRESIDENT"));
+    employeeRepository.save(new Employee("7373", "40", "SIENA", "CLERK"));
+    employeeRepository.save(new Employee("7374", "10", "LUCAS", "SALESMAN"));
+    employeeRepository.save(new Employee("7375", "30", "ROB", "CLERK"));
+    employeeRepository.save(new Employee("7376", "20", "ADRIAN", "CLERK"));
+    employeeRepository.save(new Employee("7377", "20", "ADAM", "CLERK"));
+    employeeRepository.save(new Employee("7378", "20", "SALLY", "MANAGER"));
+    employeeRepository.save(new Employee("7379", "10", "FRANK", "CLERK"));
+    employeeRepository.save(new Employee("7380", "40", "BLACK", "CLERK"));
+    employeeRepository.save(new Employee("7381", "40", "BROWN", "SALESMAN"));
   }
 }

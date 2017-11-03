@@ -17,13 +17,33 @@ import lombok.NonNull;
 public class Department implements Serializable {
 
 	@Id
-	private int deptno;
+	private String deptno;
 
 	@NonNull
 	private String name;
 
 	@PersistenceConstructor
+	public Department(String deptno, String name) {
+		super();
+		this.deptno = deptno;
+		this.name = name;
+	}
+	
 	public Department() {
+	}
+
+
+
+//	public static Department newDepartment(int deptno, String name) {
+//		return new Department(deptno, name);
+//	}
+//
+	public String getDeptno() {
+		return deptno;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	@Override

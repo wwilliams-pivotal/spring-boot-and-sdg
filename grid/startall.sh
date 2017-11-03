@@ -11,6 +11,10 @@ start locator --name=locator --properties-file=config/locator.properties --port=
 
 start server --name=server1 --locators=$HOSTNAME[$LOCATOR_PORT] --J=-Xms512m --J=-Xmx512m --cache-xml-file=config/cache.xml --properties-file=config/gemfire.properties --classpath=$PROJECT_JARS
 
+undeploy --jar=DomainService-1.0.0.BUILD-SNAPSHOT.jar
+deploy   --jar=../DomainService/target/DomainService-1.0.0.BUILD-SNAPSHOT.jar
+
+
 //start server --name=server2 --locators=$HOSTNAME[$LOCATOR_PORT] --J=-Xms512m --J=-Xmx512m --cache-xml-file=config/cache.xml --properties-file=config/gemfire.properties --server-port=$SERVER2_PORT --classpath=$PROJECT_JARS
 
 run --file=data/dept-data
